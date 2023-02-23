@@ -12,6 +12,7 @@ import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import SportsSoccerIcon from '@mui/icons-material/SportsSoccer';
+import { Link } from 'react-router-dom';
 
 const pages = ['Stats', 'Betting', 'Leaderboard'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
@@ -36,7 +37,7 @@ function NavBar() {
   };
 
   return (
-    <AppBar position="static">
+    <AppBar position="fixed" sx={{ height: '64px'}}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <SportsSoccerIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
@@ -88,9 +89,11 @@ function NavBar() {
               }}
             >
               {pages.map((page) => (
+                <Link to={"/"+page} style={{ textDecoration: 'none' }}>
                 <MenuItem key={page} onClick={handleCloseNavMenu}>
                   <Typography textAlign="center">{page}</Typography>
                 </MenuItem>
+                </Link>
               ))}
             </Menu>
           </Box>
@@ -115,13 +118,15 @@ function NavBar() {
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page) => (
-              <Button
+            <Link to={"/"+page} style={{ textDecoration: 'none' }}>
+                <Button
                 key={page}
                 onClick={handleCloseNavMenu}
                 sx={{ my: 2, color: 'white', display: 'block' }}
               >
                 {page}
               </Button>
+            </Link>
             ))}
           </Box>
 

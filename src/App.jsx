@@ -1,30 +1,25 @@
-
 import './App.css';
 import NavBar from './NavBar/NavBar';
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Stats from './Stats/Stats';
+import Betting from './Betting/Betting';
+import Leaderboard from './Leaderboard/Leaderboard';
+import { Box } from '@mui/system';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <NavBar/>
-        <h1>Today's matches</h1>
-        <h2>Man City - Man U</h2>
-        <h2>12 PM</h2>
-        <button>Place prediction</button>
-        <h3>Our AI score this game 5 - 0</h3>
-
-        <h1>Today's matches</h1>
-        <h2>Man City - Man U</h2>
-        <h2>12 PM</h2>
-        <button>Place prediction</button>
-        <h3>Our AI score this game 5 - 0</h3>
-
-        <h1>Today's matches</h1>
-        <h2>Man City - Man U</h2>
-        <h2>12 PM</h2>
-        <button>Place prediction</button>
-        <h3>Our AI score this game 5 - 0</h3>
-      </header>
+        <Router>
+        <NavBar />
+        <Box sx={{ minHeight: '100vh', marginTop: '64px' }}>
+        <Routes>
+          <Route exact path="/" element={<Stats />}/>
+          <Route path="/Stats" element={<Stats />}/>
+          <Route path="/Betting" element={<Betting />}/>
+          <Route path="/Leaderboard" element={<Leaderboard />}/>
+        </Routes>
+        </Box>
+        </Router>
     </div>
   );
 }
