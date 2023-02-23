@@ -1,11 +1,12 @@
 
 import './App.css';
+import NavBar from './NavBar/NavBar';
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-       
+        <NavBar/>
         <h1>Today's matches</h1>
         <h2>Man City - Man U</h2>
         <h2>12 PM</h2>
