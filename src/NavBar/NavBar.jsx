@@ -88,8 +88,8 @@ function NavBar() {
                 display: { xs: 'block', md: 'none' },
               }}
             >
-              {pages.map((page) => (
-                <Link to={"/"+page} style={{ textDecoration: 'none' }}>
+              {pages.map((page,index) => (
+                <Link key={index} to={"/"+page} style={{ textDecoration: 'none' }}>
                 <MenuItem key={page} onClick={handleCloseNavMenu}>
                   <Typography textAlign="center">{page}</Typography>
                 </MenuItem>
@@ -117,8 +117,8 @@ function NavBar() {
             LOGO
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-            {pages.map((page) => (
-            <Link to={"/"+page} style={{ textDecoration: 'none' }}>
+            {pages.map((page, index) => (
+            <Link key={index} to={"/"+page} style={{ textDecoration: 'none' }}>
                 <Button
                 key={page}
                 onClick={handleCloseNavMenu}

@@ -9,18 +9,25 @@ const options = {
 		'X-RapidAPI-Host': 'api-football-v1.p.rapidapi.com'
 	}
 };
-
   
 
 const Stats = () => {
+    const [data, setData] = useState(null);
+
     useEffect(() => {
-        const url = 'https://api-football-v1.p.rapidapi.com/v3/fixtures?league=39&season=2020&from=2021-01-01&to=2021-04-07';
+        let today = new Date();
+        let oneWeekFromToday = new Date(today.getFullYear(), today.getMonth(), today.getDate()+7);
+        today = today.toISOString().split('T')[0];
+        oneWeekFromToday = oneWeekFromToday.toISOString().split('T')[0];
+        console.log(today);
+        console.log(oneWeekFromToday);
+        const url = 'https://api-football-v1.p.rapidapi.com/v3/fixtures?league=39&season=2022&from='+today+'&to='+oneWeekFromToday;
     
         const fetchData = async () => {
           try {
             const response = await fetch(url, options);
             const json = await response.json();
-            console.log(json);
+            setData(json.response);
           } catch (error) {
             console.log("error", error);
           }
@@ -29,26 +36,30 @@ const Stats = () => {
         fetchData();
     }, []);
 
+    useEffect(() => {
+        console.log(data);
+    }, [data]);
+
+    const weekday = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+
 
     return(
         <div className="stats-body">
-        <h1>Today's matches</h1>
-        <h2>Man City - Man U</h2>
-        <h2>12 PM</h2>
-        <button>Place prediction</button>
-        <h3>Our AI score this game 5 - 0</h3>
+        <h1>Next 7 Days matches</h1>
+        {data ? data.map((match, index) => {
+            return(
+                <div key={index}>
+                    <h2>{match.teams.home.name} - {match.teams.away.name}</h2>
+                    <h2>{weekday[new Date(match.fixture.date).getDay()] + " " + new Date(match.fixture.date).toLocaleString()}</h2>
+                    <button>Place prediction</button>
+                    <h3>Our AI score this game 5 - 0</h3>
+                    <hr />
+                </div>
+            )
+        }) : <div></div>
+        
+        }
 
-        <h1>Today's matches</h1>
-        <h2>Man City - Man U</h2>
-        <h2>12 PM</h2>
-        <button>Place prediction</button>
-        <h3>Our AI score this game 5 - 0</h3>
-
-        <h1>Today's matches</h1>
-        <h2>Man City - Man U</h2>
-        <h2>12 PM</h2>
-        <button>Place prediction</button>
-        <h3>Our AI score this game 5 - 0</h3>
     </div>
     );
     
