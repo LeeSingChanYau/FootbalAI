@@ -1,6 +1,7 @@
 import React from "react";
 import "./Stats.css";
 import { useEffect, useState } from "react";
+import teams from "../data/teams/teams";
 
 const options = {
 	method: 'GET',
@@ -49,7 +50,9 @@ const Stats = () => {
         {data ? data.map((match, index) => {
             return(
                 <div key={index}>
+                    <img src={teams[match.teams.home.name]} alt={match.teams.home.name} />
                     <h2>{match.teams.home.name} - {match.teams.away.name}</h2>
+                    <img src={teams[match.teams.away.name]} alt={match.teams.away.name} />
                     <h2>{weekday[new Date(match.fixture.date).getDay()] + " " + new Date(match.fixture.date).toLocaleString()}</h2>
                     <button>Place prediction</button>
                     <h3>Our AI score this game 5 - 0</h3>
